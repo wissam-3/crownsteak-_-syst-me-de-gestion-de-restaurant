@@ -1,0 +1,37 @@
+{% extends 'accueil/base.html' %}
+{% block title %}Paiement - Caissier{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0"><i class="fas fa-cash-register"></i> Encaissement</h3>
+                </div>
+                <div class="card-body">
+                    <h4>Commande #{{ commande.id }}</h4>
+                    <p>Table {{ commande.table.numero }}</p>
+                    <p class="fs-3">Total à payer: <strong class="text-success">{{ commande.total }}€</strong></p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Mode de paiement</label>
+                            <select name="mode" class="form-select" required>
+                                <option value="">Choisir...</option>
+                                <option value="especes">💵 Espèces</option>
+                                <option value="carte">💳 Carte bancaire</option>
+                                <option value="mobile">📱 Paiement mobile</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-check-circle"></i> Valider le paiement
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

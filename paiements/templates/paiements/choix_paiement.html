@@ -1,0 +1,26 @@
+{% extends 'accueil/base.html' %}
+{% block title %}Choix du paiement{% endblock %}
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <h2 class="text-center mb-4">Choisissez votre mode de paiement</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Commande #{{ commande.id }}</strong></p>
+            <p><strong>Total à payer:</strong> <span class="text-danger fs-3">{{ commande.total }}€</span></p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Mode de paiement</label>
+                    <select name="mode" class="form-select" required>
+                        <option value="">-- Choisissez --</option>
+                        <option value="especes">💵 Espèces</option>
+                        <option value="carte">💳 Carte bancaire</option>
+                        <option value="mobile">📱 Paiement mobile</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success w-100 btn-lg">Payer {{ commande.total }}€</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

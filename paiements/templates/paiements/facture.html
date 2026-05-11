@@ -1,0 +1,42 @@
+{% extends 'accueil/base.html' %}
+{% block title %}Facture{% endblock %}
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card">
+        <div class="card-header bg-danger text-white text-center">
+            <h3>CrownSteak2</h3>
+            <p>123 Avenue des Saveurs, 75001 Paris</p>
+        </div>
+        <div class="card-body">
+            <h4 class="text-center">FACTURE</h4>
+            <hr>
+            <p><strong>Commande n°:</strong> {{ commande.id }}</p>
+            <p><strong>Table:</strong> {{ commande.table.numero }}</p>
+            <p><strong>Date:</strong> {{ commande.date|date:"d/m/Y H:i" }}</p>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr><th>Article</th><th>Qté</th><th>Prix unit.</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    {% for ligne in commande.lignecommande_set.all %}
+                    <tr>
+                        <td>{{ ligne.plat.nom }}</td>
+                        <td>{{ ligne.quantite }}</td>
+                        <td>{{ ligne.plat.prix }}€</td>
+                        <td>{{ ligne.plat.prix|floatformat:2 }}€</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr class="table-danger"><td colspan="3"><strong>TOTAL</strong></td><td><strong>{{ commande.total }}€</strong></td></tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{% url 'choix_paiement' commande.id %}" class="btn btn-success">Procéder au paiement</a>
+            <button onclick="window.print()" class="btn btn-secondary">Imprimer</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

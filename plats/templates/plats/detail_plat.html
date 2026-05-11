@@ -1,0 +1,77 @@
+{% extends 'accueil/base.html' %}
+{% load static %}
+{% block title %}{{ plat.nom }} - Crown Steak{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Carousel d'images -->
+            {% if images %}
+            <div id="platCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for img in images %}
+                    <button type="button" data-bs-target="#platCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for img in images %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.image.url }}" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="{{ plat.nom }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if images|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#platCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#platCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
+                </button>
+                {% endif %}
+            </div>
+            {% else %}
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800" class="img-fluid rounded" alt="{{ plat.nom }}">
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6">
+            <div class="plat-details">
+                <h1 class="display-5">{{ plat.nom }}</h1>
+                <p class="badge bg-danger mt-2">{{ plat.get_categorie_display }}</p>
+                <h2 class="text-danger mt-3 mb-4">{{ plat.prix|floatformat:2 }}DH</h2>
+                <p class="lead">{{ plat.description }}</p>
+                
+                <hr>
+                
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <div class="row g-3 align-items-end">
+                        <div class="col-auto">
+                            <label class="form-label">Quantité</label>
+                            <input type="number" name="quantite" value="1" min="1" class="form-control form-control-lg" style="width: 100px;">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-danger btn-lg px-5">
+                                <i class="fas fa-cart-plus"></i> Ajouter au panier
+                            </button>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{% url 'menu' %}" class="btn btn-outline-dark btn-lg">
+                                <i class="fas fa-arrow-left"></i> Retour au menu
+                            </a>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h5><i class="fas fa-info-circle text-danger"></i> Informations supplémentaires</h5>
+                    <p class="mb-0">✓ Produits frais préparés sur place<br>
+                    ✓ Possibilité d'adapter selon vos allergies<br>
+                    ✓ Service rapide et personnalisé</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

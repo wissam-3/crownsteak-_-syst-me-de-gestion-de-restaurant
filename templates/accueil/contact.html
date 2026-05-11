@@ -1,0 +1,68 @@
+{% extends 'accueil/base.html' %}
+{% load static %}
+{% block title %}Contact - Crown Steak{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">CONTACTEZ-<span class="text-danger">NOUS</span></h2>
+            <p class="section-subtitle">Nous sommes à votre écoute pour toute question ou réservation</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4"><i class="fas fa-envelope text-danger"></i> Formulaire de contact</h3>
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Nom complet</label>
+                                <input type="text" class="form-control" placeholder="Votre nom">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="votre@email.com">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Téléphone</label>
+                                <input type="tel" class="form-control" placeholder="+212 6 93 04 56 03">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" rows="5" placeholder="Votre message..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="fas fa-paper-plane"></i> Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4"><i class="fas fa-info-circle text-danger"></i> Nos coordonnées</h3>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-map-marker-alt text-danger"></i> Adresse</h5>
+                            <p>Bd Moulay Youssef,casablanca</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-phone text-danger"></i> Téléphone</h5>
+                            <p>+212 6 20 94 54 59</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-envelope text-danger"></i> Email</h5>
+                            <p>contactcrownsteak@gmail.com</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-clock text-danger"></i> Horaires</h5>
+                            <p>Lundi - Vendredi: 12h00 - 22h00<br>
+                            Samedi - Dimanche: 12h00 - 23h00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

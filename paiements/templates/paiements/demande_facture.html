@@ -1,0 +1,14 @@
+{% extends 'accueil/base.html' %}
+{% block title %}Demander la facture{% endblock %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Demande de facture</h2>
+    <p>Commande #{{ commande.id }} - Table {{ commande.table.numero }}</p>
+    <p>Total: <strong class="text-danger">{{ commande.total }}€</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg">Générer ma facture</button>
+        <a href="{% url 'suivi_commande' commande.id %}" class="btn btn-secondary btn-lg">Retour</a>
+    </form>
+</div>
+{% endblock %}

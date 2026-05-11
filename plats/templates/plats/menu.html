@@ -1,0 +1,163 @@
+{% extends 'accueil/base.html' %}
+{% load static %}
+{% block title %}Menu - Crown Steak{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-4">
+    <div class="text-center mb-5">
+        <h2 class="section-title">NOTRE <span class="text-danger">CARTE</span></h2>
+        <p class="section-subtitle">Découvrez nos délicieux plats préparés avec passion</p>
+        
+        <!-- Lien vers le panier -->
+        <a href="{% url 'panier' %}" class="btn btn-danger position-relative mt-3">
+            <i class="fas fa-shopping-cart"></i> Mon panier
+            {% if panier %}
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                {{ panier|length }}
+            </span>
+            {% endif %}
+        </a>
+    </div>
+
+    <!-- Filtres par catégorie -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="category-filters text-center">
+                <a href="{% url 'menu' %}" class="btn btn-outline-danger m-1 {% if not categorie_active %}active{% endif %}">
+                    Tous
+                </a>
+                {% for key, value in categories.items %}
+                <a href="?categorie={{ key }}" class="btn btn-outline-danger m-1 {% if categorie_active == key %}active{% endif %}">
+                    {{ value }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Affichage des plats -->
+    <div class="row">
+        {% for plat in plats %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="plat-card">
+                <a href="{% url 'detail_plat' plat.id %}" class="text-decoration-none">
+                    <div class="plat-img">
+                        {% with plat.images.first as image %}
+                        {% if image %}
+                        <img src="{{ image.image.url }}" alt="{{ plat.nom }}" class="img-fluid">
+                        {% else %}
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" alt="{{ plat.nom }}" class="img-fluid">
+                        {% endif %}
+                        {% endwith %}
+                        <div class="plat-overlay">
+                            <i class="fas fa-eye"></i> Voir détails
+                        </div>
+                    </div>
+                </a>
+                <div class="plat-info">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'detail_plat' plat.id %}" class="text-decoration-none text-dark">
+                            <h4>{{ plat.nom }}</h4>
+                        </a>
+                        <span class="prix">{{ plat.prix|floatformat:2 }}DH</span>
+                    </div>
+                    <p class="text-muted">{{ plat.description|truncatewords:15 }}</p>
+                    <form method="post" class="mt-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="plat_id" value="{{ plat.id }}">
+                        <div class="d-flex gap-2">
+                            <input type="number" name="quantite" value="1" min="1" class="form-control form-control-sm w-25">
+                            <button type="submit" class="btn btn-danger w-75">
+                                <i class="fas fa-cart-plus"></i> Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p>Aucun plat disponible pour le moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.plat-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.plat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.plat-img {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.plat-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.plat-card:hover .plat-img img {
+    transform: scale(1.1);
+}
+
+.plat-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.plat-card:hover .plat-overlay {
+    opacity: 1;
+}
+
+.plat-info {
+    padding: 1.5rem;
+}
+
+.plat-info h4 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.prix {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #dc3545;
+}
+
+.btn-outline-danger.active {
+    background-color: #dc3545;
+    color: white;
+}
+
+.category-filters .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+</style>
+{% endblock %}

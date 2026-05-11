@@ -1,0 +1,201 @@
+{% extends 'accueil/base.html' %}
+{% load static %}
+{% block title %}Crown Steak - Restaurant de luxe{% endblock %}
+
+{% block content %}
+<!-- Hero Section avec image de fond -->
+<section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <h1 class="animate-fadeInUp">CROWN <span class="text-danger">STEAK</span></h1>
+        <p class="lead animate-fadeInUp delay-1">L'art de la viande, l'excellence du service</p>
+        <div class="hero-buttons animate-fadeInUp delay-2">
+            <a href="{% url 'choisir_table' %}" class="btn btn-danger btn-lg me-3">
+                <i class="fas fa-utensils"></i> Commander maintenant
+            </a>
+            <a href="#menu" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-scroll"></i> Découvrir notre menu
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Section spécialités -->
+<section class="specialites py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">NOS <span class="text-danger">SPÉCIALITÉS</span></h2>
+            <p class="section-subtitle">Des viandes d'exception préparées par nos chefs</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="specialite-card">
+                    <div class="specialite-img">
+                        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400" alt="Entrecôte" class="img-fluid">
+                    </div>
+                    <div class="specialite-info">
+                        <h4>Entrecôte Grillée</h4>
+                        <p>Entrecôte française grillée à la perfection, servie avec nos frites maison</p>
+                        <span class="price">29€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="specialite-card">
+                    <div class="specialite-img">
+                        <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=400" alt="Filet de Bœuf" class="img-fluid">
+                    </div>
+                    <div class="specialite-info">
+                        <h4>Filet de Bœuf</h4>
+                        <p>Filet de bœuf grillée à la perfection, servie avec nos frites maison</p>
+                        <span class="price">29€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="specialite-card">
+                    <div class="specialite-img">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400" alt="brochette de viande" class="img-fluid">
+                    </div>
+                    <div class="specialite-info">
+                        <h4>brochette de viande</h4>
+                        <p>brochette de viande maturée 28 jours, pour deux personnes</p>
+                        <span class="price">59€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section pourquoi nous choisir -->
+<section class="why-us py-5 bg-dark text-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title text-white">POURQUOI <span class="text-danger">NOUS CHOISIR</span></h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils fa-3x text-danger"></i>
+                </div>
+                <h4>Viandes Premium</h4>
+                <p>Sélection rigoureuse des meilleures viandes</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-chef-hat fa-3x text-danger"></i>
+                </div>
+                <h4>Chefs Étoilés</h4>
+                <p>Une cuisine d'exception par nos chefs</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-clock fa-3x text-danger"></i>
+                </div>
+                <h4>Service Rapide</h4>
+                <p>Commande préparée en temps réel</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-wine-bottle fa-3x text-danger"></i>
+                </div>
+                <h4>Cave à Vins</h4>
+                <p>Une sélection des meilleurs vins</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section avis clients -->
+<section class="testimonials py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">CE QUE DISENT <span class="text-danger">NOS CLIENTS</span></h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left text-danger"></i>
+                    <p>Une expérience culinaire incroyable ! La viande est parfaitement cuite et le service est impeccable.</p>
+                    <div class="rating">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                    <h5>-Nidal jabal</h5>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left text-danger"></i>
+                    <p>Le meilleur steak de Paris ! L'ambiance est chaleureuse et le personnel très professionnel.</p>
+                    <div class="rating">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                    <h5>- sami doubla</h5>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left text-danger"></i>
+                    <p>Je recommande vivement ! La carte est variée et les prix sont très abordables pour la qualité.</p>
+                    <div class="rating">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star-half-alt text-warning"></i>
+                    </div>
+                    <h5>-abdelaziz choukri</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4 Boutons d'action -->
+<section class="action-buttons py-4">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <a href="{% url 'accueil' %}" class="btn-action">
+                    <i class="fas fa-home fa-2x"></i>
+                    <span>Accueil</span>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'contact' %}" class="btn-action">
+                    <i class="fas fa-envelope fa-2x"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{% url 'choisir_table' %}" class="btn-action">
+                    <i class="fas fa-shopping-cart fa-2x"></i>
+                    <span>Commander</span>
+                </a>
+            </div>
+            <div class="col-md-3">
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="btn-action">
+                    <i class="fas fa-sign-out-alt fa-2x"></i>
+                    <span>Déconnexion</span>
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn-action">
+                    <i class="fas fa-sign-in-alt fa-2x"></i>
+                    <span>Se connecter</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

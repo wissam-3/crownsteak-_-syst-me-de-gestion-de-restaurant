@@ -1,0 +1,34 @@
+{% extends 'accueil/base.html' %}
+{% block title %}Valider ma commande{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Récapitulatif de votre commande</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Table:</strong> {{ table.numero }}</p>
+            <table class="table">
+                <thead>
+                    <tr><th>Plat</th><th>Quantité</th><th>Prix unit.</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    {% for item in plats %}
+                    <tr>
+                        <td>{{ item.plat.nom }}</td>
+                        <td>{{ item.quantite }}</td>
+                        <td>{{ item.plat.prix }}€</td>
+                        <td>{{ item.total }}€</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr class="table-danger"><td colspan="3"><strong>TOTAL</strong></td><td><strong>{{ total }}€</strong></td></tr>
+                </tfoot>
+            </table>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success w-100">Confirmer la commande</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

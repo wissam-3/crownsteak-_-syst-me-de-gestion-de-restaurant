@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Crown Steak - Restaurant{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <style>
+        /* Pour que le footer reste toujours en bas */
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'accueil' %}">
+                <i class="fas fa-crown"></i> CROWN <span class="text-danger">STEAK</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accueil' %}"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'avis' %}"><i class="fas fa-star"></i> Donner un avis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'choisir_table' %}"><i class="fas fa-utensils"></i> Commander</a></li>
+                    
+                    <!-- Suivi commande (visible seulement si commande en cours) -->
+                    {% if request.session.commande_id and request.session.table_id %}
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="{% url 'suivi_commande' %}">
+                            <i class="fas fa-eye"></i> Suivre ma commande
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Espace Employé (connexion) -->
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-briefcase"></i> {{ user.username }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if user.profile.role == 'chef' %}
+                            <li><a class="dropdown-item" href="{% url 'chef_dashboard' %}"><i class="fas fa-kitchen-set"></i> Dashboard Chef</a></li>
+                            {% elif user.profile.role == 'caissier' %}
+                            <li><a class="dropdown-item" href="{% url 'caissier_dashboard' %}"><i class="fas fa-cash-register"></i> Dashboard Caissier</a></li>
+                            {% elif user.profile.role == 'serveur' %}
+                            <li><a class="dropdown-item" href="{% url 'serveur_dashboard' %}"><i class="fas fa-concierge-bell"></i> Dashboard Serveur</a></li>
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link btn-connect" href="{% url 'login' %}"><i class="fas fa-briefcase"></i> Espace Employé</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-crown"></i> CROWN STEAK</h5>
+                    <p>Le meilleur restaurant de steak à casablanca.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Horaires</h5>
+                    <p>Lundi - Dimanche: 12h - 23h</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p>Bd Moulay Youssef,casablanca<br>+212 6 20 94 54 59</p>
+                </div>
+            </div>
+            <div class="text-center copyright">
+                <p>&copy; 2026 Crown Steak</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

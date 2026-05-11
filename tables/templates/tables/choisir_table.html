@@ -1,0 +1,44 @@
+{% extends 'accueil/base.html' %}
+{% block title %}Choisir votre table{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Choisissez votre numéro de table</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post" class="text-center">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            {% for table in tables %}
+            <div class="col-md-2 col-4 mb-3">
+                {% if table.est_occupee %}
+                    <!-- Table occupée - bouton désactivé -->
+                    <button type="button" class="btn btn-secondary btn-lg p-4 w-100" disabled style="opacity: 0.6; cursor: not-allowed;">
+                        <i class="fas fa-chair fa-2x mb-2 d-block"></i> 
+                        Table {{ table.numero }}
+                        <small class="d-block text-danger">Occupée</small>
+                    </button>
+                {% else %}
+                    <!-- Table disponible -->
+                    <button type="submit" name="table_id" value="{{ table.id }}" class="btn btn-outline-danger btn-lg p-4 w-100">
+                        <i class="fas fa-chair fa-2x mb-2 d-block"></i> 
+                        Table {{ table.numero }}
+                        <small class="d-block text-success">Disponible</small>
+                    </button>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p>Aucune table disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+    </form>
+</div>
+{% endblock %}

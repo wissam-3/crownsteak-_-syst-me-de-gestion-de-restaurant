@@ -1,0 +1,364 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 76px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 1rem 0;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.navbar-brand span {
+    color: #dc3545;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin: 0 0.5rem;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    color: #dc3545 !important;
+}
+
+.btn-connect {
+    background: #dc3545;
+    color: white !important;
+    border-radius: 30px;
+    padding: 8px 20px !important;
+}
+
+.btn-connect:hover {
+    background: #b02a37;
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://images.unsplash.com/photo-1550547660-d9450f859349?w=1600');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.hero-content h1 span {
+    color: #dc3545;
+}
+
+.hero-content .lead {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.delay-1 {
+    animation-delay: 0.3s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.delay-2 {
+    animation-delay: 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Section Titles */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Specialités Cards */
+.specialites {
+    background: #f8f9fa;
+}
+
+.specialite-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    margin-bottom: 30px;
+}
+
+.specialite-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.specialite-img {
+    height: 250px;
+    overflow: hidden;
+}
+
+.specialite-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.specialite-card:hover .specialite-img img {
+    transform: scale(1.1);
+}
+
+.specialite-info {
+    padding: 1.5rem;
+}
+
+.specialite-info h4 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.specialite-info p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.specialite-info .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dc3545;
+}
+
+/* Why Us Section */
+.why-us {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.feature-icon {
+    margin-bottom: 1.5rem;
+}
+
+.feature-icon i {
+    transition: transform 0.3s;
+}
+
+.feature-icon i:hover {
+    transform: scale(1.1);
+}
+
+/* Testimonials */
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.3s;
+    height: 100%;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.testimonial-card i.fa-quote-left {
+    font-size: 2rem;
+    color: #dc3545;
+    margin-bottom: 1rem;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.testimonial-card .rating {
+    margin-bottom: 1rem;
+}
+
+.testimonial-card h5 {
+    font-weight: 600;
+    color: #dc3545;
+}
+
+/* Action Buttons */
+.action-buttons {
+    background: #1a1a1a;
+}
+
+.btn-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: #2d2d2d;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.btn-action:hover {
+    background: #dc3545;
+    transform: translateY(-5px);
+    color: white;
+}
+
+.btn-action i {
+    margin-bottom: 0.5rem;
+}
+
+.btn-action span {
+    font-weight: 500;
+}
+
+/* Footer */
+.footer {
+    background: #0a0a0a;
+    color: #999;
+    padding: 3rem 0 1rem;
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer h5 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.footer i {
+    margin-right: 10px;
+    color: #dc3545;
+}
+
+.copyright {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content .lead {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .btn-action {
+        padding: 1rem;
+    }
+}
+
+/* Boutons personnalisés */
+.btn-danger {
+    background: #dc3545;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-danger:hover {
+    background: #b02a37;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220,53,69,0.3);
+}
+
+.btn-outline-light {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Alertes */
+.alert {
+    border-radius: 10px;
+}

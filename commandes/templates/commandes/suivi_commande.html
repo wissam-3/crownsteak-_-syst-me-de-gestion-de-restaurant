@@ -1,0 +1,123 @@
+{% extends 'accueil/base.html' %}
+{% load static %}
+{% block title %}Suivi de ma commande - Crown Steak{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-receipt"></i> Suivi de ma commande
+                    </h3>
+                </div>
+                <div class="card-body">
+                    
+                    {% if commande.statut == 'payee' %}
+                    <!-- Message de confirmation de paiement -->
+                    <div class="alert alert-success text-center">
+                        <i class="fas fa-check-circle fa-3x mb-2 d-block"></i>
+                        <h3>Merci pour votre commande !</h3>
+                        <p>Votre paiement a été effectué avec succès.</p>
+                        <p>À bientôt chez Crown Steak !</p>
+                        <hr>
+                        <a href="{% url 'accueil' %}" class="btn btn-danger mt-2">
+                            <i class="fas fa-home"></i> Retour à l'accueil
+                        </a>
+                    </div>
+                    {% else %}
+                    
+                    <!-- Infos commande -->
+                    <div class="text-center mb-4">
+                        <h4>Table {{ commande.table.numero }}</h4>
+                        <p class="text-muted">Commande #{{ commande.id }}</p>
+                        <p class="text-muted">{{ commande.date|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    
+                    <!-- Statut -->
+                    <div class="alert alert-{{ status_class }} text-center">
+                        <h4>{{ status_icon }} {{ status_text }}</h4>
+                    </div>
+                    
+                    <!-- Barre de progression -->
+                    <div class="mb-4">
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar 
+                                {% if commande.statut == 'en_attente' %}bg-warning
+                                {% elif commande.statut == 'en_preparation' %}bg-info
+                                {% elif commande.statut == 'prete' %}bg-success
+                                {% else %}bg-secondary{% endif %}"
+                                style="width: 
+                                    {% if commande.statut == 'en_attente' %}20%
+                                    {% elif commande.statut == 'en_preparation' %}40%
+                                    {% elif commande.statut == 'prete' %}60%
+                                    {% elif commande.statut == 'servie' %}80%
+                                    {% else %}100%{% endif %}">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <small>⏳ En attente</small>
+                            <small>🍳 Préparation</small>
+                            <small>✅ Prête</small>
+                            <small>🍽️ Servie</small>
+                            <small>💳 Payée</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Détails des plats -->
+                    <h5>Votre commande :</h5>
+                    <ul class="list-group mb-4">
+                        {% for ligne in commande.lignecommande_set.all %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ ligne.plat.nom }}
+                            <span class="badge bg-danger rounded-pill">x{{ ligne.quantite }}</span>
+                        </li>
+                        {% endfor %}
+                        <li class="list-group-item active">
+                            <strong>Total : {{ commande.total|floatformat:2 }}€</strong>
+                        </li>
+                    </ul>
+                    
+                    <!-- Boutons actions -->
+                    <div class="text-center">
+                        {% if commande.statut == 'prete' %}
+                        <a href="{% url 'demande_facture' commande.id %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-file-invoice"></i> Demander la facture
+                        </a>
+                        {% elif commande.statut == 'servie' %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-credit-card"></i> Votre commande a été servie ! Veuillez vous rapprocher de la caisse pour le paiement.
+                        </div>
+                        {% elif commande.statut == 'payee' %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> Paiement effectué avec succès ! Merci.
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Votre commande est en cours de préparation.
+                        </div>
+                        {% endif %}
+                        
+                        <a href="{% url 'accueil' %}" class="btn btn-outline-secondary mt-3">
+                            <i class="fas fa-home"></i> Retour à l'accueil
+                        </a>
+                    </div>
+                    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auto-refresh toutes les 10 secondes pour mettre à jour le statut -->
+{% if commande.statut != 'payee' %}
+<script>
+    setTimeout(function() {
+        location.reload();
+    }, 10000);
+</script>
+{% endif %}
+
+{% endblock %}
