@@ -19,7 +19,7 @@ Elle permet de digitaliser et simplifier la gestion des commandes, des tables et
 - Gestion des commandes (serveurs)
 - Préparation des plats (chefs)
 - Mise à jour du statut des commandes
-- Gestion de la caisse
+- Gestion de la caisse (caissier)
 
 ---
 
@@ -28,7 +28,7 @@ Elle permet de digitaliser et simplifier la gestion des commandes, des tables et
 - Django
 - HTML / CSS
 - JavaScript
-- SQLite (ou autre base de données)
+- MySql
 
 ---
 
